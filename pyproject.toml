@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aws-ireveal-mcp"
+version = "0.1.0"
+description = "AWS incident response and investigation tools"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp",
+    "boto3",
+]
