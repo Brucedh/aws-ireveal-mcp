@@ -47,7 +47,7 @@ Add the following configuration to your MCP client's settings file:
 ```
 {
   "mcpServers": {
-    "AWS-IReveal": {
+    "aws-ireveal": {
       "command": "uv",
       "args": [
         "run",
