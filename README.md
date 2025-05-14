@@ -24,7 +24,7 @@ Together, these services let you
 
 ### Example Prompts
 
-- analyze activity by IP 3.89.129.37 in the last 5 days
+- analyze activity by IP x.x.x.x in the last 5 days
 - analyze activity by role 'sysadmin' in the last 24 hours
 - investigate suspicious activity on cloudtrail in the last 7 days on us-west-2
 - is there any data event on buckets with name containing 'customers' in the last 7 days?
