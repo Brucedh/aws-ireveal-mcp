@@ -1,5 +1,7 @@
 # AWS‑IReveal‑MCP
 
+[![smithery badge](https://smithery.ai/badge/@Brucedh/aws-ireveal-mcp)](https://smithery.ai/server/@Brucedh/aws-ireveal-mcp)
+
 **AWS‑IReveal‑MCP** is a Model Context Protocol (MCP) server designed to give security teams and incident responders a unified interface to AWS services useful for investigation. By connecting AWS‑IReveal‑MCP to any MCP client (such as Claude Desktop or Cline), you can invoke queries and analyses across multiple AWS services without leaving your LLM‑driven workspace.
 
 ## Features
@@ -33,6 +35,14 @@ Together, these services let you
 - identify non-compliant resources, explain violated rules, and suggest remediation
 
 ## Installation
+
+### Installing via Smithery
+
+To install aws-ireveal-mcp for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@Brucedh/aws-ireveal-mcp):
+
+```bash
+npx -y @smithery/cli install @Brucedh/aws-ireveal-mcp --client claude
+```
 
 ### Prerequisites
 
