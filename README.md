@@ -2,6 +2,10 @@
 
 **AWS‑IReveal‑MCP** is a Model Context Protocol (MCP) server designed to give security teams and incident responders a unified interface to AWS services useful for investigation. By connecting AWS‑IReveal‑MCP to any MCP client (such as Claude Desktop or Cline), you can invoke queries and analyses across multiple AWS services without leaving your LLM‑driven workspace.
 
+<a href="https://glama.ai/mcp/servers/@Brucedh/aws-ireveal-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@Brucedh/aws-ireveal-mcp/badge" alt="AWS‑IReveal‑MCP MCP server" />
+</a>
+
 ## Features
 
 AWS‑IReveal‑MCP integrates with the following AWS services and functionalities:
