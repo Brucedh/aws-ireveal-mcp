@@ -1,0 +1,31 @@
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
+
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required: []
+    properties:
+      awsProfile:
+        type: string
+        default: default
+        description: AWS profile name for credentials
+      awsRegion:
+        type: string
+        default: us-east-1
+        description: AWS region for service calls
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => ({
+      command: 'mcp',
+      args: ['run', 'server.py'],
+      env: {
+        ...(config.awsProfile ? { AWS_PROFILE: config.awsProfile } : {}),
+        ...(config.awsRegion ? { AWS_REGION: config.awsRegion } : {})
+      }
+    })
+  exampleConfig:
+    awsProfile: default
+    awsRegion: us-east-1
