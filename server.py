@@ -146,11 +146,12 @@ def get_organization_details():
 
 @mcp.tool()
 async def athena_create_cloudtrail_table(
-    aws_region: str,
     cloudtrail_bucket: str,
     is_org_trail: bool,
     account_id: str,
     output_bucket: str,
+    output_region: str,
+    partition_region: str,
     database: str = "default",
 ) -> str:
     """
@@ -162,12 +163,13 @@ async def athena_create_cloudtrail_table(
     </IMPORTANT>
 
     Parameters:
-      aws_region (str): The AWS region - use 'us-east-1' if not specified.
       cloudtrail_bucket (str): The S3 bucket for CloudTrail logs - you can retrieve it using the 'cloudtrail_describe_trails' tool.
       is_org_trail (bool): Indicates if the trail is for the organization.
       account_id (str): Your AWS account ID - you can retrieve it.
-      database (str): Athena database name to be used.
       output_bucket (str): Ask the user if not specified, S3 bucket URI (e.g. 's3://my-athena-query-results/') for query results - different from cloudtrail_bucket.
+      output_region (str): The AWS region for the output bucket - use 'us-east-1' if not specified.
+      partition_region (str): The region of the events to be queried. It is used to create the S3 path for the Athena table.
+      database (str): Athena database name to be used.
 
     Returns:
       str: An empty result if successful, or an error message if there was an issue.
@@ -182,9 +184,9 @@ async def athena_create_cloudtrail_table(
     # Get the organization ID if the trail is for the organization.
     if is_org_trail:
         org_id = get_organization_details().get('Id')
-        trail_location = f's3://{cloudtrail_bucket}/AWSLogs/{org_id}/{account_id}/CloudTrail/{aws_region}/'
+        trail_location = f's3://{cloudtrail_bucket}/AWSLogs/{org_id}/{account_id}/CloudTrail/{partition_region}/'
     else:
-        trail_location = f's3://{cloudtrail_bucket}/AWSLogs/{account_id}/CloudTrail/{aws_region}/'
+        trail_location = f's3://{cloudtrail_bucket}/AWSLogs/{account_id}/CloudTrail/{partition_region}/'
 
     # Set the start date for partition projection.
     start_date = (datetime.datetime.now() - datetime.timedelta(days=10)).strftime("%Y/%m/%d") # Format: yyyy/MM/dd, 10 days ago
@@ -274,7 +276,7 @@ TBLPROPERTIES (
   'storage.location.template'='{trail_location}/${{timestamp}}')
 """
     try:
-        athena_client = boto3.client('athena', region_name=aws_region)
+        athena_client = boto3.client('athena', region_name=output_region)
         result = await run_athena_query(athena_client, database, output_bucket, query)
         return result
     except Exception as e:
