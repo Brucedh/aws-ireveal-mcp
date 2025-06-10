@@ -315,10 +315,10 @@ async def athena_query_events(
       output_bucket: S3 bucket URI (e.g. 's3://my-athena-query-results/') for query results - different from cloudtrail_bucket.
       event_names: List of event names to filter on (e.g. ["GetObject", "DeleteObject"])
       principal_id: Optional principal ID to filter on. Use the percent sign (%) as a wildcard character.
-      user_arn: Optional user ARN to filter on. Use the percent sign (%) as a wildcard character.
-      user_name: Optional user name to filter on.
-      role_name: Optional role name to filter on.
-      ip_address: Optional IP address to filter on. Use the percent sign (%) as a wildcard character.
+      user_arn: Optional user ARN to filter on. Use the percent sign (%) as a wildcard character. This is the ARN of the user performing the action.
+      user_name: Optional user name to filter on. This is the name of the user performing the action.
+      role_name: Optional role name to filter on. This is the name of the role assumed by the user performing the action.
+      ip_address: Optional IP address to filter on. Use the percent sign (%) as a wildcard character. This is the IP address of the user performing the action.
       bucket_name: Optional bucket name to filter on. Use the percent sign (%) as a wildcard character.
       limit: Maximum number of results to return (default is 50).
 
@@ -404,6 +404,7 @@ async def cloudwatch_describe_log_groups(
         Pattern: [\.\-_/#A-Za-z0-9]*
         If you specify a string for this parameter, the operation returns only log groups that have names that match the string based on a case-sensitive substring search. 
         For example, if you specify Foo, log groups named FooBar, aws/Foo, and GroupFoo would match, but foo, F/o/o and Froo would not match.
+        Thus, if you don't find any results with uppercase letters, try using lowercase letters.
 
     Returns:
       str: JSON-formatted list of log groups.
