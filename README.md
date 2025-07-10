@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/brucedh-aws-ireveal-mcp-badge.png)](https://mseep.ai/app/brucedh-aws-ireveal-mcp)
+
 # AWS‑IReveal‑MCP
 
 **AWS‑IReveal‑MCP** is a Model Context Protocol (MCP) server designed to give security teams and incident responders a unified interface to AWS services useful for investigation. By connecting AWS‑IReveal‑MCP to any MCP client (such as Claude Desktop or Cline), you can invoke queries and analyses across multiple AWS services without leaving your LLM‑driven workspace.
