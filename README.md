@@ -36,10 +36,17 @@ Together, these services let you
 
 ### Prerequisites
 
-- Python 3
-- MCP Python SDK (`mcp[cli]`)  
-- `boto3` (AWS SDK for Python)  
-- AWS credentials configured
+- Install UV with:
+```bash
+curl -Ls https://astral.sh/uv/install.sh | sh
+```
+- Clone the repo and set up the environment (this will install the required dependencies):
+```bash
+git clone https://github.com/Brucedh/aws-ireveal-mcp.git
+cd aws-ireveal-mcp
+uv venv
+source .venv/bin/activate
+```
 
 ### Configuration
 Add the following configuration to your MCP client's settings file:
@@ -50,8 +57,10 @@ Add the following configuration to your MCP client's settings file:
     "aws-ireveal": {
       "command": "uv",
       "args": [
+        "--directory",
+        "/path_to_your/aws-ireveal-mcp",
         "run",
-        "/path/to/aws-ireveal-mcp/server.py"
+        "server.py"
       ],
       "env": {
         "AWS_PROFILE": "<YOUR_PROFILE>"
